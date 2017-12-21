@@ -1,5 +1,17 @@
+#忽略IDEA配置文件夹
 .idea
 
-target
 
+#忽略所有的target文件夹
+taotao-parent/**/target
+
+#忽略 .iml
 *.iml
+*.iml
+*.iml
+target
+*.iml
+target
+target
+*.iml
+target
