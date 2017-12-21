@@ -1,0 +1,13 @@
+任务：
+	搭建淘淘商城的后台管理系统结构，common为通用的工具类、通用的pojo
+	dao层会用到pojo(mybatis)，interface会用到pojo(返回参数)，service层要依赖dao层
+心得体会：
+	梳理后台管理系统的结构，了解了相互的依赖关系
+	taotao-manager-dao(pom.xml)
+		dao层进行数据库的操作，会用到spring，mybatis，mysql和数据库连接池（Druid)
+		mybatis在这里进行实现，会用到pojo，所以要对manager-pojo进行依赖
+	taotao-manager-interface(pom.xml)
+		这里仅仅是对pojo进行操作，作为返回参数之类的，所以依赖manager-pojo
+	taotao-manager-service(pom.xml)
+		这里要发布manager的服务，所以会在build里面添加tomcat插件
+		对dao进行依赖，并且添加spring依赖，实现spring+mybatis的组合
