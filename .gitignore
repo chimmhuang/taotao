@@ -15,3 +15,15 @@ target
 target
 *.iml
 target
+*.project
+*.classpath
+*.project
+*.classpath
+/taotao-parent/generatorSqlmapCustom/bin
+/taotao-parent/generatorSqlmapCustom/lib
+.settings
+.settings
+*.classpath
+*.project
+.settings
+.svn
