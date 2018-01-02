@@ -65,6 +65,7 @@
 ### 2.2 查询单个商品，RequestMapping："/item/{itemId}"，Verb：GET
 返回json数据，TbItem类
 ```javascript
+{
 	id=1,
 	title="test",
 	price=1,
@@ -72,6 +73,7 @@
 	...
 	...
 	/*   List<TbItem>  */
+}
 ```
 
 
