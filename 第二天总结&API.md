@@ -52,13 +52,13 @@
 {
 	total:3180,//总数
 	rows:[{//List，行数
-		id=1,
-		title="test",
-		price=1,
-		num=1,
-		...
-		...
-		/*   List<TbItem>  */
+	id=1,
+	title="test",
+	price=1,
+	num=1,
+	...
+	...
+	/*   List<TbItem>  */
 	}]
 }
 ```
