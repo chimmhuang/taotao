@@ -9,19 +9,27 @@
 	1.同步加载、异步加载、延迟加载
 	[参照](https://www.cnblogs.com/mylanguage/p/5635971.html)
 		`同步加载：`
-		我们平时最常使用的就是这种同步加载形式：
-		<script src="http://XXX.com/script.js"></script>
-		同步模式，又称阻塞模式，会阻止浏览器的后续处理，停止了后续的解  析，因此停止了后续的文件加载（如图像）、渲染、代码执行。一般的script标签（不带async等属性）加载时会阻塞浏览器，也就是说，浏览器在下载或执行该js代码块时，后面的标签不会被解析
+			我们平时最常使用的就是这种同步加载形式：
+			<script src="http://XXX.com/script.js"></script>
+			同步模式，又称阻塞模式，会阻止浏览器的后续处理，停止了后续的解析，因此停止了
+			后续的文件加载（如图像）、渲染、代码执行。一般的script标签（不带async等属性）
+			加载时会阻塞浏览器，也就是说，浏览器在下载或执行该js代码块时，后面的标签不会被解析
 		`异步加载：`
-		异步加载又叫非阻塞，浏览器在下载执行 js 同时，还会继续进行后续页面的处理。这种方法是在页面中<script>标签内，用 js 创建一个 script 元素并插入到 document 中。这样就做到了非阻塞的下载 js 代码。
+			异步加载又叫非阻塞，浏览器在下载执行 js 同时，还会继续进行后续页面的处理。这
+			种方法是在页面中<script>标签内，用 js 创建一个 script 元素并插入到
+			document 中。这样就做到了非阻塞的下载 js 代码。
 		`延迟加载：`
-		有些 js 代码并不是页面初始化的时候就立刻需要的，而稍后的某些情况才需要的。延迟加载就是一开始并不加载这些暂时不用的js，而是在需要的时候或稍后再通过js 的控制来异步加载
+			有些 js 代码并不是页面初始化的时候就立刻需要的，而稍后的某些情况才需要的。
+			延迟加载就是一开始并不加载这些暂时不用的js，而是在需要的时候或稍后再通过js 的控制来异步加载
 
 	2.图片服务器
-		使用FastDFS工具类实现对图片的上传，在web工程中新建一个配置文件，里面写入tracker_server的地址，并在controller里面引用(classpath:resource/client.config)，详细使用情况见taotao-manager-web下的PictureController.java
+		使用FastDFS工具类实现对图片的上传，在web工程中新建一个配置文件，里面写入tracker_server的地址，
+		并在controller里面引用(classpath:resource/client.config)，详细使用情况见taotao-manager-web下的
+		PictureController.java
 
 # 遇到的问题
-	1.在写了一个图片服务器地址的配置文件之后，忘记了在springmvc中引用此文件，导致在图片url组合的时候，组合出了错误的url，图片上传成功，但是前台不能显示出图片
+	1.在写了一个图片服务器地址的配置文件之后，忘记了在springmvc中引用此文件，导致在图片url组合的时候，
+	组合出了错误的url，图片上传成功，但是前台不能显示出图片
 
 
 第三天学习的API
