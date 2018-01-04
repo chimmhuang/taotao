@@ -3,13 +3,18 @@ package com.taotao.manager.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.taotao.common.pojo.EasyUIDataGridResult;
+import com.taotao.common.pojo.TaotaoResult;
+import com.taotao.common.utils.IDUtils;
 import com.taotao.manager.service.ItemService;
+import com.taotao.mapper.TbItemDescMapper;
 import com.taotao.mapper.TbItemMapper;
 import com.taotao.pojo.TbItem;
+import com.taotao.pojo.TbItemDesc;
 import com.taotao.pojo.TbItemExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -17,6 +22,8 @@ public class ItemServiceImpl implements ItemService{
 
     @Autowired
     private TbItemMapper tbItemMapper;
+    @Autowired
+    private TbItemDescMapper tbItemDescMapper;
 
     /**
      * 通过ID查询商品
@@ -54,5 +61,38 @@ public class ItemServiceImpl implements ItemService{
         result.setRows(itemList);
 
         return result;
+    }
+
+    /**
+     * 添加商品功能
+     * @param item TbItem对象
+     * @param desc 商品描述
+     * @return TaotaoResult
+     */
+    @Override
+    public TaotaoResult addItem(TbItem item, String desc) {
+        //生成商品ID
+        final long itemId = IDUtils.getItemId();
+        //补全item的属性
+        item.setId(itemId);
+        //商品状态，1-正常，2-下架，3-伤处
+        item.setStatus((byte) 1);
+        item.setCreated(new Date());
+        item.setUpdated(new Date());
+
+        //向商品表插入item数据
+        tbItemMapper.insert(item);
+
+        //创建一个商品描述表对应的pojo
+        TbItemDesc itemDesc = new TbItemDesc();
+        itemDesc.setItemId(itemId);
+        itemDesc.setItemDesc(desc);
+        itemDesc.setCreated(new Date());
+        itemDesc.setUpdated(new Date());
+
+        //向商品描述表插入desc数据
+        tbItemDescMapper.insert(itemDesc);
+
+        return TaotaoResult.ok();
     }
 }
