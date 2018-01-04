@@ -45,7 +45,7 @@
 
 ----
 
-## 2.商品列表页面(item-list)
+## 2.商品列表页面(localhost:8081)
 ### 2.1 查询商品列表，RequestMapping："/item/list"，Verb：GET，参数：page=1&rows=30
 返回json数据
 ```javascript
