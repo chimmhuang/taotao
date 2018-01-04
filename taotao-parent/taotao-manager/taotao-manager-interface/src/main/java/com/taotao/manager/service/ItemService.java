@@ -11,4 +11,7 @@ public interface ItemService {
     TbItem getItemById(long itemId);
     EasyUIDataGridResult getItemList(int startPage,int pageSize);
     TaotaoResult addItem(TbItem item,String desc);
+    TaotaoResult updateItemStatus(List<Long> ids,Byte status);
+    TaotaoResult deleteItem(List<Long> ids);
+
 }

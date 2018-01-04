@@ -194,6 +194,21 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
+  <!--更新商品状态-->
+  <update id="updateStatusById" parameterType="map">
+    UPDATE tb_item
+    <set>
+        status = #{status,jdbcType=TINYINT},
+      <if test="updated != null">
+        updated = #{updated,jdbcType=TIMESTAMP}
+      </if>
+    </set>
+    <where>
+      <if test="id != null">
+        id = #{id,jdbcType=BIGINT}
+      </if>
+    </where>
+  </update>
   <update id="updateByExampleSelective" parameterType="map" >
     update tb_item
     <set >

@@ -4,6 +4,7 @@ import com.taotao.pojo.TbItem;
 import com.taotao.pojo.TbItemExample;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
 import java.util.List;
 
 public interface TbItemMapper {
@@ -28,4 +29,8 @@ public interface TbItemMapper {
     int updateByPrimaryKeySelective(TbItem record);
 
     int updateByPrimaryKey(TbItem record);
+
+    //上/下架商品
+    int updateStatusById(@Param("id") Long id,@Param("updated") Date updateDate,@Param("status") byte status);
+
 }

@@ -56,6 +56,15 @@
         		onLoad :function(){
         			//回显数据
         			var data = $("#itemList").datagrid("getSelections")[0];
+
+//                    var itemList = $("#itemList");
+//                    var sels = itemList.datagrid("getSelections");
+//                    var ids = [];
+//                    for(var i in sels){
+//                        ids.push(sels[i].id);
+//                    }
+//                    var data = ids[0];
+
         			data.priceView = TAOTAO.formatPrice(data.price);
         			$("#itemeEditForm").form("load",data);
         			

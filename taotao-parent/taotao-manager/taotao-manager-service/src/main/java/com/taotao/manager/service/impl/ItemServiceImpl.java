@@ -11,6 +11,7 @@ import com.taotao.mapper.TbItemMapper;
 import com.taotao.pojo.TbItem;
 import com.taotao.pojo.TbItemDesc;
 import com.taotao.pojo.TbItemExample;
+import com.taotao.pojo.TbItemExample.Criteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -75,7 +76,7 @@ public class ItemServiceImpl implements ItemService{
         final long itemId = IDUtils.getItemId();
         //补全item的属性
         item.setId(itemId);
-        //商品状态，1-正常，2-下架，3-伤处
+        //商品状态，1-正常，2-下架，3-删除
         item.setStatus((byte) 1);
         item.setCreated(new Date());
         item.setUpdated(new Date());
@@ -93,6 +94,33 @@ public class ItemServiceImpl implements ItemService{
         //向商品描述表插入desc数据
         tbItemDescMapper.insert(itemDesc);
 
+        return TaotaoResult.ok();
+    }
+
+    /**
+     * 上/下架商品（更新商品状态）
+     * @param ids 商品ID集合
+     * @return TaotaoResult
+     */
+    @Override
+    public TaotaoResult updateItemStatus(List<Long> ids,Byte status) {
+        //商品状态，1-正常，2-下架，3-删除
+        for (Long id : ids) {
+            tbItemMapper.updateStatusById(id,new Date(),status);
+        }
+        return TaotaoResult.ok();
+    }
+
+    /**
+     * 删除商品
+     * @param ids 商品ID集合
+     * @return TaotaoResult
+     */
+    @Override
+    public TaotaoResult deleteItem(List<Long> ids) {
+        for (Long id : ids) {
+            tbItemMapper.deleteByPrimaryKey(id);
+        }
         return TaotaoResult.ok();
     }
 }
