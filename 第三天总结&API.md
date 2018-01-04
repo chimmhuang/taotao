@@ -21,6 +21,7 @@
 			有些 js 代码并不是页面初始化的时候就立刻需要的，而稍后的某些情况才需要的。
 			延迟加载就是一开始并不加载这些暂时不用的js，而是在需要的时候或稍后再通过js 的控制来异步加载
 [参照](https://www.cnblogs.com/mylanguage/p/5635971.html)
+
 	2.图片服务器
 		使用FastDFS工具类实现对图片的上传，在web工程中新建一个配置文件，里面写入tracker_server的地址，
 		并在controller里面引用(classpath:resource/client.config)，详细使用情况见taotao-manager-web下的
