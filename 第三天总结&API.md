@@ -30,6 +30,7 @@
 # 遇到的问题
 	1.在写了一个图片服务器地址的配置文件之后，忘记了在springmvc中引用此文件，导致在图片url组合的时候，
 	组合出了错误的url，图片上传成功，但是前台不能显示出图片
+	2.商品修改功能，前台传入的url有问题，导致这个功能无法实现
 
 
 第三天学习的API
@@ -89,6 +90,53 @@
 
 ```javascript
 上传成功：
+{
+	"status":200,
+	"msg":ok
+}
+```
+-----
+## 2.查询商品后对商品的操作(localhost:8081)
+###2.1 商品上架，RequestMapping："/rest/item/reshelf"，Verb：POST
+请求参数：
+```javascript
+{
+	"ids":12351252,6543646,12324653,121245
+}
+```
+返回json数据：
+```javascript
+上架成功
+{
+	"status":200,
+	"msg":ok
+}
+```
+### 2.2 商品下架，RequestMapping："/rest/item/instock"，Verb：POST
+请求参数：
+```javascript
+{
+	"ids":12351252,6543646,12324653,121245
+}
+```
+返回json数据：
+```javascript
+下架成功
+{
+	"status":200,
+	"msg":ok
+}
+```
+### 2.3 商品删除，RequestMapping："/rest/item/delete"，Verb：POST
+请求参数：
+```javascript
+{
+	"ids":12351252,6543646,12324653,121245
+}
+```
+返回json数据：
+```javascript
+删除成功
 {
 	"status":200,
 	"msg":ok
