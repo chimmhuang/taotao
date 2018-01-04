@@ -8,6 +8,7 @@
 # 心得体会&学到的东西
 	1.同步加载、异步加载、延迟加载
 	[参照](https://www.cnblogs.com/mylanguage/p/5635971.html)
+	[我的博客](http://blog.csdn.net/guodongxiaren "悬停显示")
 		`同步加载：`
 			我们平时最常使用的就是这种同步加载形式：
 			<script src="http://XXX.com/script.js"></script>
@@ -31,11 +32,12 @@
 	1.在写了一个图片服务器地址的配置文件之后，忘记了在springmvc中引用此文件，导致在图片url组合的时候，
 	组合出了错误的url，图片上传成功，但是前台不能显示出图片
 	2.商品修改功能，前台传入的url有问题，导致这个功能无法实现
+	3.大坑
 
 
 第三天学习的API
 =====
-##  1.后台新增商品(localhost:8080)
+##  1.后台新增商品(localhost:8081)
 ### 1.1 商品分类选择，RequestMapping："/item/cat/list"，Verb：POST
 请求参数：
 ```javascript
@@ -79,7 +81,7 @@
 	"title":"商品标题",
 	"sellPoint":"商品卖点",
 	"priceView":"1999.00",
-	"price":"199900",
+	"price":199900,
 	"num":95,//库存数量
 	"barcode":12415724,//条形码
 	"image":"http...",//图片地址
@@ -92,16 +94,17 @@
 上传成功：
 {
 	"status":200,
-	"msg":ok
+	"msg":"ok"
 }
 ```
+
 -----
 ## 2.查询商品后对商品的操作(localhost:8081)
 ###2.1 商品上架，RequestMapping："/rest/item/reshelf"，Verb：POST
 请求参数：
 ```javascript
 {
-	"ids":12351252,6543646,12324653,121245
+	"ids":"12351252,6543646,12324653,121245"
 }
 ```
 返回json数据：
@@ -109,14 +112,14 @@
 上架成功
 {
 	"status":200,
-	"msg":ok
+	"msg":"ok"
 }
 ```
 ### 2.2 商品下架，RequestMapping："/rest/item/instock"，Verb：POST
 请求参数：
 ```javascript
 {
-	"ids":12351252,6543646,12324653,121245
+	"ids":"12351252,6543646,12324653,121245"
 }
 ```
 返回json数据：
@@ -124,14 +127,14 @@
 下架成功
 {
 	"status":200,
-	"msg":ok
+	"msg":"ok"
 }
 ```
 ### 2.3 商品删除，RequestMapping："/rest/item/delete"，Verb：POST
 请求参数：
 ```javascript
 {
-	"ids":12351252,6543646,12324653,121245
+	"ids":"12351252,6543646,12324653,121245"
 }
 ```
 返回json数据：
@@ -139,7 +142,42 @@
 删除成功
 {
 	"status":200,
-	"msg":ok
+	"msg":"ok"
+}
+```
+-----
+## 3.商品修改时需要加载的内容(localhost:8081)
+### 3.1 加载商品描述，RequestMapping："/rest/item/desc/{id}"，Verb：GET
+返回json数据：
+```javascript
+加载成功：
+{
+	"status":200,
+	"msg":"ok"
+	"data":
+	{
+		"itemId":123,
+		"created":"2017/12/31",//会被序列化为1433500495290
+		"updated":"2018/1/4",
+		"itemDesc":"商品描述"
+	}
+}
+```
+### 3.2加载商品规格，RequestMapping："/rest/item/param/item/{id}"，Verb：GET
+返回json数据：
+```javascript
+加载成功：
+{
+	"status":2000,
+	"msg":"ok",
+	"data":
+	{
+		"id":3,
+		"itemId":1433500495290,
+		"created":"2017/12/31",//会被序列化为1433500495290
+		"updated":"2018/1/4",
+		"paramData":"[{\"group\":\"主体\"..."
+	}
 }
 ```
 
