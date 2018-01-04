@@ -7,8 +7,7 @@
 
 # 心得体会&学到的东西
 	1.同步加载、异步加载、延迟加载
-	[参照](https://www.cnblogs.com/mylanguage/p/5635971.html)
-	[我的博客](http://blog.csdn.net/guodongxiaren "悬停显示")
+[参照](https://www.cnblogs.com/mylanguage/p/5635971.html)
 		`同步加载：`
 			我们平时最常使用的就是这种同步加载形式：
 			<script src="http://XXX.com/script.js"></script>
@@ -32,7 +31,11 @@
 	1.在写了一个图片服务器地址的配置文件之后，忘记了在springmvc中引用此文件，导致在图片url组合的时候，
 	组合出了错误的url，图片上传成功，但是前台不能显示出图片
 	2.商品修改功能，前台传入的url有问题，导致这个功能无法实现
-	3.大坑
+	3.大坑，在使用mybatis查询itemParamItem的时候，使用example无法查询出param_data的字段，上网查了很久，
+	  发现了问题出自selectbyexample与selectbyexampleBlobs。在mysql里面param_data是text类型的，
+	  mybatis自动生成映射文件的时候针对text类型的数据会默认生成这两个方法，使用前者查询不取这个参数，
+	  在有需要的时候我们用后者查询来提高查询效率节省资源。
+[参照](http://blog.csdn.net/sshuidajiao/article/details/53812746)
 
 
 第三天学习的API
