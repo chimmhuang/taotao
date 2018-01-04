@@ -36,8 +36,8 @@
 ----------
 第二天学习的API
 =====
-##  1.展示后台页面
-### 1.1 RequestMapping:  "localhost:8080/" ， Verb：GET
+##  1.展示后台页面(localhost:8081)
+### 1.1 RequestMapping:  "localhost:8081/" ， Verb：GET
 返回View，index.jsp后台主页
 
 ### 1.2 RequestMapping："/{page}"，Verb：GET
@@ -45,7 +45,7 @@
 
 ----
 
-## 2.商品列表页面
+## 2.商品列表页面(item-list)
 ### 2.1 查询商品列表，RequestMapping："/item/list"，Verb：GET，参数：page=1&rows=30
 返回json数据
 ```javascript
