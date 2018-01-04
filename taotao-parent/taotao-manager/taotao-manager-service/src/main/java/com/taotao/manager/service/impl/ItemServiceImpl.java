@@ -10,6 +10,7 @@ import com.taotao.mapper.TbItemDescMapper;
 import com.taotao.mapper.TbItemMapper;
 import com.taotao.pojo.TbItem;
 import com.taotao.pojo.TbItemDesc;
+import com.taotao.pojo.TbItemDescExample;
 import com.taotao.pojo.TbItemExample;
 import com.taotao.pojo.TbItemExample.Criteria;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -123,4 +124,6 @@ public class ItemServiceImpl implements ItemService{
         }
         return TaotaoResult.ok();
     }
+
+
 }

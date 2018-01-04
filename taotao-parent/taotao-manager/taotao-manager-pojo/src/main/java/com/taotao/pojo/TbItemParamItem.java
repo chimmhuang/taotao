@@ -53,4 +53,15 @@ public class TbItemParamItem implements Serializable {
     public void setParamData(String paramData) {
         this.paramData = paramData == null ? null : paramData.trim();
     }
+
+    @Override
+    public String toString() {
+        return "TbItemParamItem{" +
+                "id=" + id +
+                ", itemId=" + itemId +
+                ", created=" + created +
+                ", updated=" + updated +
+                ", paramData='" + paramData + '\'' +
+                '}';
+    }
 }

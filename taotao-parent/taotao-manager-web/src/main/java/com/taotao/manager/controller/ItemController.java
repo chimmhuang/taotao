@@ -5,12 +5,10 @@ import com.taotao.common.pojo.TaotaoResult;
 import com.taotao.manager.service.ItemService;
 import com.taotao.manager.utils.SubStringIds;
 import com.taotao.pojo.TbItem;
+import com.taotao.pojo.TbItemDesc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -109,5 +107,7 @@ public class ItemController {
         TaotaoResult result = itemService.addItem(item,desc);
         return result;
     }
+
+
 
 }
