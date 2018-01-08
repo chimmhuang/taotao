@@ -9,11 +9,17 @@
 
 # 心得体会&学到的东西
 	1.由于搜索引擎对静态网页比较友好，所以在商城首页(用户访问页面)，做网页静态化。
-	2.由于首页欢迎页是index.jsp，前端控制器的拦截请求是.html，所以不能通过localhost:8082/ 来访问主页，无法拦截“/”，方式1是设置一个RequestMapping，为“/index”，然后在浏览器访问localhost:8082/index.html即可，方式2是在web.xml中设置欢迎页为<welcome-file>index.html</welcome-file>，在访问localhost:8082时，会加载欢迎，但是由于没有index.html，所以找不到这个网页，被Servlet前端控制器拦截(.html)，接着就会访问RequestMapping为(“/index”)的Controller
-	3.mybatis的主键返回：SELECT LAST_INSERT_ID()，有事务隔离，仅在当前执行语句的事务里面执行，要在执行完INSERT语句之后执行
+	2.由于首页欢迎页是index.jsp，前端控制器的拦截请求是.html，所以不能通过localhost:8082/ 来访问主页，
+	  无法拦截“/”，方式1是设置一个RequestMapping，为“/index”，然后在浏览器访问localhost:8082/index.html即可，
+	  方式2是在web.xml中设置欢迎页为<welcome-file>index.html</welcome-file>，在访问localhost:8082时，
+	  会加载欢迎，但是由于没有index.html，所以找不到这个网页，被Servlet前端控制器拦截(.html)，接着就会访问
+	  RequestMapping为(“/index”)的Controller
+	3.mybatis的主键返回：SELECT LAST_INSERT_ID()，有事务隔离，仅在当前执行语句的事务里面执行，
+	  要在执行完INSERT语句之后执行
 
 # 遇到的问题
-	1.在执行修改操作的时候，kindeditor这个富文本框无法加载单纯文字的内容，但如果内容里面是有图片的，就能加载，很奇怪，未解决。。。
+	1.在执行修改操作的时候，kindeditor这个富文本框无法加载单纯文字的内容，但如果内容里面是有图片的，就能加载，
+	  很奇怪，未解决。。。
 
 ----
 
