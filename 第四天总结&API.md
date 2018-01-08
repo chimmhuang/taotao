@@ -14,10 +14,12 @@
 	  方式2是在web.xml中设置欢迎页为<welcome-file>index.html</welcome-file>，在访问localhost:8082时，
 	  会加载欢迎，但是由于没有index.html，所以找不到这个网页，被Servlet前端控制器拦截(.html)，接着就会访问
 	  RequestMapping为(“/index”)的Controller
-	3.mybatis的主键返回：SELECT LAST_INSERT_ID()，有事务隔离，仅在当前执行语句的事务里面执行，要在执行完INSERT语句之后执行
+	3.mybatis的主键返回：SELECT LAST_INSERT_ID()，有事务隔离，仅在当前执行语句的事务里面执行，
+	  要在执行完INSERT语句之后执行
 
 # 遇到的问题
-	1.在执行修改操作的时候，kindeditor这个富文本框无法加载单纯文字的内容，但如果内容里面是有图片的，就能加载，很奇怪，未解决。。。
+	1.在执行修改操作的时候，kindeditor这个富文本框无法加载单纯文字的内容，但如果内容里面是有图片的，就能加载，
+	  很奇怪，未解决。。。
 
 ----
 
