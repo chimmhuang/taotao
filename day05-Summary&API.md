@@ -41,7 +41,8 @@
 		安装ruby，安装rubygem，安装gem redis.gem
 		将src目录下的redis-tr ib.rb文件复制到/usr/local/redis-cluster目录下
 		在cluster目录下，使用ruby脚本搭建集群
-		./redis-trib.rb create --replicas 192.168.31.100:7001 192.168.31.100:7002 192.168.31.100:7003 192.168.31.100:7004 192.168.31.100:7005 192.168.31.100:7006
+		./redis-trib.rb create --replicas 192.168.31.100:7001 192.168.31.100:7002 192.168.31.100:7003
+		192.168.31.100:7004 192.168.31.100:7005 192.168.31.100:7006
 	6.redis集群，有主节点和从节点，哈希槽都在主节点上，从节点上没有槽，但是从节点对应一个主节点，相当于是主节点的备份
 	7.centOS下链接redis集群，./redis-cli -p 7006 -c
 	8.查看集群信息 cluster info、查看集群节点cluster nodes
