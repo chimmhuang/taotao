@@ -10,13 +10,16 @@
 	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
 	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd">
 
-<!--配置包扫描器，扫描所有带@Service注解的类-->
+    <!-- 加载数据库配置文件 -->
+    <context:property-placeholder location="classpath:properties/ServersIP.properties" />
+
+
+    <!--配置包扫描器，扫描所有带@Service注解的类-->
     <context:component-scan base-package="com.taotao.manager.service"/>
     <!--
         扫描包会自动扫描到实现类，然后创建该实现类的bean，由于没有自定义取名字@Service("name")
         所以会默认生成一个，首字母小写的bean name，如ItemServiceImpl，默认生成itemServiceImpl
     -->
-
 
     <!--发布Dubbo服务-->
     <!--提供方应用信息，用于计算依赖关系-->
@@ -26,8 +29,7 @@
         若有多个注册中心，则用逗号分离
         <dubbo:registry protocol="zookeeper" address="192.168.25.130:2181,192.168.25.131:2181"/>
     -->
-    <!--<dubbo:registry protocol="zookeeper" address="192.168.25.134:2181"/>-->
-    <dubbo:registry protocol="zookeeper" address="192.168.31.100:2181"/>
+    <dubbo:registry protocol="zookeeper" address="${DELL_SERVER_ZOOKEEPER}:2181"/>
     <!--使用dubbo协议在20880端口暴露服务-->
     <dubbo:protocol name="dubbo" port="20880"/>
     <!--声明要暴露的服务接口-->
