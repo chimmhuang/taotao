@@ -11,4 +11,9 @@
     <bean id="httpSolrServer" class="org.apache.solr.client.solrj.impl.HttpSolrServer">
         <constructor-arg name="baseURL" value="http://${DELL_SERVER_ZOOKEEPER}:8080/solr/collection1"/>
     </bean>
+    <!--集群版solr的连接-->
+    <!--<bean id="cloudSolrServer" class="org.apache.solr.client.solrj.impl.CloudSolrServer">-->
+        <!--<constructor-arg name="zkHost" value="192.168.31.100:2181,192.168.31.100:2182,192.168.31.100:2183"/>-->
+        <!--<property name="defaultCollection" value="collection2"/>-->
+    <!--</bean>-->
 </beans>

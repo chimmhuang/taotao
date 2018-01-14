@@ -27,3 +27,4 @@ target
 *.project
 .settings
 .svn
+logs

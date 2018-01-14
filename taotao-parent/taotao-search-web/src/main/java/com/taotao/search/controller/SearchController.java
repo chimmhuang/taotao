@@ -20,8 +20,8 @@ public class SearchController {
 
     @RequestMapping("/search")
     public String search(@RequestParam("q") String queryString,
-                         @RequestParam(defaultValue = "1")Integer page, Model model){
-        try {
+                         @RequestParam(defaultValue = "1")Integer page, Model model) throws Exception{
+
             //需要对请求参数进行转码处理
             queryString = new String(queryString.getBytes("iso-8859-1"),"utf-8");
             SearchResult search = searchService.search(queryString, page, SEARCH_RESULT_ROWS);
@@ -30,10 +30,10 @@ public class SearchController {
             model.addAttribute("totalpage",search.getPageCount());
             model.addAttribute("itemList",search.getItemList());
             model.addAttribute("page",page);
+            int i = 1;
+            int j = 0;
+            int k = 1/0;
             return "search";
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "search";
-        }
+
     }
 }
