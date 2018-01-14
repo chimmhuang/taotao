@@ -30,9 +30,9 @@ public class SearchController {
             model.addAttribute("totalpage",search.getPageCount());
             model.addAttribute("itemList",search.getItemList());
             model.addAttribute("page",page);
-            int i = 1;
-            int j = 0;
-            int k = 1/0;
+//            int i = 1;
+//            int j = 0;
+//            int k = 1/0;
             return "search";
 
     }
