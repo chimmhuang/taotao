@@ -7,7 +7,7 @@ JAVA_OPTS="-DzkHost=192.168.25.154:2181,192.168.25.154:2182,192.168.25.154:2183"
 
 
 3、连接zookeeper的命令：
-./zkCli.sh -server 192.168.25.154:2182
+./zkCli.sh -server 192.168.25.154:2182 
 
 4、SolrCloud创建Collection的命令
 http://192.168.25.154:8180/solr/admin/collections?action=CREATE&name=collection2&numShards=2&replicationFactor=2
