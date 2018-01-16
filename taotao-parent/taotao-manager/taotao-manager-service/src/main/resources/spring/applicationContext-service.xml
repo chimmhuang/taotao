@@ -10,9 +10,8 @@
 	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
 	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd">
 
-    <!-- 加载数据库配置文件 -->
-    <context:property-placeholder location="classpath:properties/ServersIP.properties" />
-
+    <!-- 加载属性配置文件 -->
+    <context:property-placeholder location="classpath:properties/*.properties" />
 
     <!--配置包扫描器，扫描所有带@Service注解的类-->
     <context:component-scan base-package="com.taotao.manager.service"/>

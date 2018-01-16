@@ -14,8 +14,12 @@ import com.taotao.pojo.TbItemDescExample;
 import com.taotao.pojo.TbItemExample;
 import com.taotao.pojo.TbItemExample.Criteria;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.core.JmsTemplate;
+import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+import javax.jms.*;
 import java.util.Date;
 import java.util.List;
 
@@ -26,6 +30,12 @@ public class ItemServiceImpl implements ItemService{
     private TbItemMapper tbItemMapper;
     @Autowired
     private TbItemDescMapper tbItemDescMapper;
+
+    @Autowired
+    private JmsTemplate jmsTemplate;
+
+    @Resource(name = "itemAddTopic")
+    private Destination destination;//java的注解
 
     /**
      * 通过ID查询商品
@@ -95,6 +105,17 @@ public class ItemServiceImpl implements ItemService{
         //向商品描述表插入desc数据
         tbItemDescMapper.insert(itemDesc);
 
+        /*******第8天----向activemq发送商品添加事件*******/
+        //向activemq发送商品添加消息
+        jmsTemplate.send(destination, new MessageCreator() {
+            @Override
+            public Message createMessage(Session session) throws JMSException {
+                //要发送商品ID
+                TextMessage message = session.createTextMessage(itemId+"");
+                return message;
+            }
+        });
+        /*******第8天----向activemq发送商品添加事件*******/
         return TaotaoResult.ok();
     }
 
