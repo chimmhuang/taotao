@@ -9,34 +9,44 @@
 	  解压就可以直接使用了，不过会有一个问题，就是在后台访问的时候，点击queue的时候会出西安503错误，
 	  解决Activemq访问后台(192.168.31.100:8161)出现503错误:
 		1).查看机器名
-		[root@server bin]# cat /etc/sysconfig/network
-		NETWORKING=yes
-		HOSTNAME=server
+		   [root@server bin]# cat /etc/sysconfig/network
+		   NETWORKING=yes
+		   HOSTNAME=server
 
 		2).修改host文件
-		[root@server bin]# cat /etc/hosts
-		127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4 server
-		::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
-		[root@server bin]# 
+		   [root@server bin]# cat /etc/hosts
+		   127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4 server
+		   ::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+		   [root@server bin]# 
 
 		3).重启Activemq服务
 		
 	2.8161是web访问的端口。61616是消息服务的端口
 	
 	3.queue和topic的区别：
-		1).queue仅仅允许一个消息传送个一个客户（一对一），接收者获得消息后，消息就会在消息队列中消失，其他人就不能在得到它，但是如果没有消费者在监听queue的消息，该消息会一直保留在消息队列，直到被消费
-		2).topic可以有多个客户端（一对多），只有监听topic的才会收到消息，如果没有消费者监听topic，那么该topic的消息就在消息队列中丢失
+		1).queue仅仅允许一个消息传送个一个客户（一对一），接收者获得消息后，消息就会在消息队列中消失，其他人
+		   就不能在得到它，但是如果没有消费者在监听queue的消息，该消息会一直保留在消息队列，直到被消费
+		2).topic可以有多个客户端（一对多），只有监听topic的才会收到消息，如果没有消费者监听topic，那么该topic
+		   的消息就在消息队列中丢失
 	4.@Autowired是spring的注解，@Resource是java提供的注解，一般通过name来注解就可以使用@Resource
 	
 # 遇到的问题
-	1.在测试active与spring整合的时候，一直报错，错误部分代码:Invalid broker URI: 192.168.31.100:61616，错误原因是，activemq的connection连接，是tcp协议的连接，所以应该在brokerURL上面，加入tcp://，，原来错误配置：<property name="brokerURL" value="${LOCAL_INTEGRATED_SERVER}:61616"/>改进后的配置：<property name="brokerURL" value="tcp://${LOCAL_INTEGRATED_SERVER}:61616"/>
+	1.在测试active与spring整合的时候，一直报错，错误部分代码:Invalid broker URI: 192.168.31.100:61616，错误原因是，
+	  activemq的connection连接，是tcp协议的连接，所以应该在brokerURL上面，加入tcp://，，原来错误配置：
+	  <property name="brokerURL" value="${LOCAL_INTEGRATED_SERVER}:61616"/>
+	  改进后的配置：<property name="brokerURL" value="tcp://${LOCAL_INTEGRATED_SERVER}:61616"/>
 	
-	2.问题：spring容器只允许有一个<context:property-placeholder/>，由于每个模块的xml都各自引用了所需要的配置文件，导致spring在读取了第一个xml所需要的配置文件后，后面的xml文件不会取读取了，原因就是，Spring容器仅允许最多定义一个PropertyPlaceholderConfigurer(或<context:property-placeholder/>)，其余的会被Spring忽略掉。。。解决办法：我个人的解决办法是在applicationContext-service.xml中，引用全部所需的配置文件，然后将其余xml文件中的引用给注释掉
+	2.问题：spring容器只允许有一个<context:property-placeholder/>，由于每个模块的xml都各自引用了所需要的配置文件，
+	  导致spring在读取了第一个xml所需要的配置文件后，后面的xml文件不会取读取了，原因就是，Spring容器仅允许最多定义一个
+	  PropertyPlaceholderConfigurer(或<context:property-placeholder/>)，其余的会被Spring忽略掉。。。解决办法：
+	  我个人的解决办法是在applicationContext-service.xml中，引用全部所需的配置文件，然后将其余xml文件中的引用给注释掉
 [参照](http://blog.csdn.net/a12458/article/details/52506649)
 
 	3.在配置好消息监听器的时候，要记得在applicationContext-activemq.xml中配置bean，否则无法注入，无法创建消费者
 
-	4.[大坑]测试添加商品到索引库的时候，无限报错The destination temp-topic://item-add-topic does not exist。。找了许久的原因，最后发现，在配置Destination目的地的时候，bean的class写成了org.apache.activemq.command.ActiveMQTempTopic，应该ActiveMQTopic这个class才对
+	4.[大坑]测试添加商品到索引库的时候，无限报错The destination temp-topic://item-add-topic does not exist。。
+	  找了许久的原因，最后发现，在配置Destination目的地的时候，bean的class写成了
+	  org.apache.activemq.command.ActiveMQTempTopic，应该ActiveMQTopic这个class才对
 	
 ----
 
@@ -156,7 +166,8 @@ public class ItemAddMessageListener implements MessageListener{
     <!--配置监听器-->
     <bean id="myMessageListen" class="com.taotao.search.listener.MyMessageListener"/>
     <!--消息监听容器-->
-    <bean id="defaultMessageListenerContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+    <bean id="defaultMessageListenerContainer" 
+	  class="org.springframework.jms.listener.DefaultMessageListenerContainer">
         <property name="connectionFactory" ref="connectionFactory"/>
         <property name="destination" ref="test-queue"/>
         <property name="messageListener" ref="myMessageListen"/>
