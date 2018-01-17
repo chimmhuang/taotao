@@ -1,91 +1,91 @@
-# ÈÎÎñ
-	1.ÉÌÆ·ÏêÇéÒ³ÃæÕ¹Ê¾£¬¶¯Ì¬Õ¹Ê¾ jsp + redis
-	2.Ê¹ÓÃfreemarkerÊµÏÖÍøÒ³¾²Ì¬»¯
-	3.ActiveMqÍ¬²½Éú³É¾²Ì¬ÍøÒ³
+# ä»»åŠ¡
+	1.å•†å“è¯¦æƒ…é¡µé¢å±•ç¤ºï¼ŒåŠ¨æ€å±•ç¤º jsp + redis
+	2.ä½¿ç”¨freemarkerå®ç°ç½‘é¡µé™æ€åŒ–
+	3.ActiveMqåŒæ­¥ç”Ÿæˆé™æ€ç½‘é¡µ
 	
 ------
 
-# ĞÄµÃÌå»á&Ñ§µ½µÄ¶«Î÷
-	1.redisµÄÊ¹ÓÃ£º
-		ÔÚÉÌÆ·ÏêÇéĞÅÏ¢Ìí¼Ó»º´æµÄÊ±ºò£¬²»ÄÜÉèÖÃhash´æ´¢£¬ÒòÎªhash²»ÄÜÉèÖÃÀïÃæÃ¿¸ökey-valueµÄ¹ıÆÚÊ±¼ä,hashÊÊºÏ³¤ÆÚ±£´æ£¬ÒªÉèÖÃ¹ıÆÚÊ±¼ä£¬¾ÍÓÃstringÈ¥´æ´¢get,set,expire
+# å¿ƒå¾—ä½“ä¼š&å­¦åˆ°çš„ä¸œè¥¿
+	1.redisçš„ä½¿ç”¨ï¼š
+		åœ¨å•†å“è¯¦æƒ…ä¿¡æ¯æ·»åŠ ç¼“å­˜çš„æ—¶å€™ï¼Œä¸èƒ½è®¾ç½®hashå­˜å‚¨ï¼Œå› ä¸ºhashä¸èƒ½è®¾ç½®é‡Œé¢æ¯ä¸ªkey-valueçš„è¿‡æœŸæ—¶é—´,hashé€‚åˆé•¿æœŸ
+		ä¿å­˜ï¼Œè¦è®¾ç½®è¿‡æœŸæ—¶é—´ï¼Œå°±ç”¨stringå»å­˜å‚¨get,set,expire
 
-	2.freemarkerµÄÊ¹ÓÃ£º
-		Ñ­»·Ê¹ÓÃ¸ñÊ½£º
-	<#list stuList as stu>
-			<tr>
+	2.freemarkerçš„ä½¿ç”¨ï¼š
+		1).å¾ªç¯ä½¿ç”¨æ ¼å¼ï¼š
+			<#list stuList as stu>
+				<tr>
+					<td>${stu.id}</td>
+					<td>${stu.name}</td>
+					<td>${stu.age}</td>
+					<td>${stu.address}</td>
+				</tr>
+			</#list>
+	
+		2).ifåˆ¤æ–­çš„ä½¿ç”¨ï¼š
+			<#--éš”è¡Œå˜è‰²-->
+			<#if stu_index % 2 == 0>
+			    <tr bgcolor="red">
+			<#else >
+			    <tr bgcolor="green">
+			</#if>
+				<td>${stu_index}</td>
 				<td>${stu.id}</td>
 				<td>${stu.name}</td>
 				<td>${stu.age}</td>
 				<td>${stu.address}</td>
-			</tr>
-		</#list>
-	
-	ifÅĞ¶ÏµÄÊ¹ÓÃ£º
-		<#--¸ôĞĞ±äÉ«-->
-                <#if stu_index % 2 == 0>
-                    <tr bgcolor="red">
-                <#else >
-                    <tr bgcolor="green">
-                </#if>
-                        <td>${stu_index}</td>
-                        <td>${stu.id}</td>
-                        <td>${stu.name}</td>
-                        <td>${stu.age}</td>
-                        <td>${stu.address}</td>
-                    </tr>
+			    </tr>
 
-	ÈÕÆÚµÄÊ¹ÓÃ£º
-		    µ±Ç°ÈÕÆÚ£º${date?date}<br>
-    µ±Ç°Ê±¼ä£º${date?time}<br>
-    µ±Ç°ÈÕÆÚºÍÊ±¼ä£º${date?datetime}<br>
-    ×Ô¶¨ÒåÈÕÆÚ¸ñÊ½£º${date?string("yyyy/MM/dd HH:mm:ss")}<br>
+		3).æ—¥æœŸçš„ä½¿ç”¨ï¼š
+		    å½“å‰æ—¥æœŸï¼š${date?date}<br>
+		    å½“å‰æ—¶é—´ï¼š${date?time}<br>
+		    å½“å‰æ—¥æœŸå’Œæ—¶é—´ï¼š${date?datetime}<br>
+		    è‡ªå®šä¹‰æ—¥æœŸæ ¼å¼ï¼š${date?string("yyyy/MM/dd HH:mm:ss")}<br>
 
 
-	nullÖµµÄ´¦Àí£ºnullÖµµÄ´¦Àí£º${val!"Ä¬ÈÏÖµ"}<br>
-    nullÖµµÄ´¦Àí£º${val!}<br>
-    nullÖµµÄÅĞ¶Ï£º
-    <#if val??>
-        val²»Îª¿Õ
-    <#else >
-        valÊÇ¿ÕÖµ
-    </#if>
+		4).nullå€¼çš„å¤„ç†ï¼šnullå€¼çš„å¤„ç†ï¼š${val!"é»˜è®¤å€¼"}<br>
+		    nullå€¼çš„å¤„ç†ï¼š${val!}<br>
+		    nullå€¼çš„åˆ¤æ–­ï¼š
+		    <#if val??>
+			valä¸ä¸ºç©º
+		    <#else >
+			valæ˜¯ç©ºå€¼
+		    </#if>
 
+		5).includeæ ‡ç­¾çš„ä½¿ç”¨ï¼š
+			includeæ ‡ç­¾æµ‹è¯•ï¼š<#include "hello.ftl">
 
-
-	include±êÇ©µÄÊ¹ÓÃ£º
-	include±êÇ©²âÊÔ£º<#include "hello.ftl">
-
-	3.@RequestParamºÍ@PathvariableµÄÇø±ğ:
-		@RequestParamÊÇÔÚurlºóÃæ¸úÎÊºÅ´«²ÎÊıµÄÊ±ºòÊ¹ÓÃ£¬Èç/item?id=100
-		@PathVariableÊÇÔÚurlÖĞÓĞÕ¼Î»µÄÊ±ºòÊ¹ÓÃ£¬Èç/item/{itemId}
-[²ÎÕÕ](https://www.cnblogs.com/helloworld-hyyx/p/5295514.html)	
-# Óöµ½µÄÎÊÌâ
-	1.ÔÚ·µ»ØÂß¼­ÊÓÍ¼µÄÊ±ºò£¬ÊÇ²»ÄÜÔÚControllerÀïÃæĞ´@ResponseBodyµÄ
+	3.@RequestParamå’Œ@Pathvariableçš„åŒºåˆ«:
+		@RequestParamæ˜¯åœ¨urlåé¢è·Ÿé—®å·ä¼ å‚æ•°çš„æ—¶å€™ä½¿ç”¨ï¼Œå¦‚/item?id=100
+		@PathVariableæ˜¯åœ¨urlä¸­æœ‰å ä½çš„æ—¶å€™ä½¿ç”¨ï¼Œå¦‚/item/{itemId}
+[å‚ç…§](https://www.cnblogs.com/helloworld-hyyx/p/5295514.html)	
+# é‡åˆ°çš„é—®é¢˜
+	1.åœ¨è¿”å›é€»è¾‘è§†å›¾çš„æ—¶å€™ï¼Œæ˜¯ä¸èƒ½åœ¨Controlleré‡Œé¢å†™@ResponseBodyçš„
 	
 ----
 
-µÚ¾ÅÌìÑ§Ï°µÄAPI
+ç¬¬ä¹å¤©å­¦ä¹ çš„API
 =====
-##  1.ÉÌÆ·ÏêÇéÒ³Ãæ(localhost:8086)
-### 1.1 ÉÌÆ·ÏêÇéÒ³ÃæÕ¹Ê¾£¬RequestMapping£º"/item/{itemId}"£¬Verb£ºGET
-ÇëÇó²ÎÊı£º
+##  1.å•†å“è¯¦æƒ…é¡µé¢(localhost:8086)
+### 1.1 å•†å“è¯¦æƒ…é¡µé¢å±•ç¤ºï¼ŒRequestMappingï¼š"/item/{itemId}"ï¼ŒVerbï¼šGET
+è¯·æ±‚å‚æ•°ï¼š
 ```javascript
 {
 	"itemId":43
 }
 ```
-·µ»ØÂß¼­ÊÓÍ¼view£¬modelÀïÃæ°üº¬ÉÌÆ·ĞÅÏ¢
+è¿”å›é€»è¾‘è§†å›¾viewï¼Œmodelé‡Œé¢åŒ…å«å•†å“ä¿¡æ¯
 ```javascript
 model:
 {
-	"item":item, //ÉÌÆ·ItemÀà£¬°üº¬Í¼Æ¬
-	"itemDesc":itemDesc //ÉÌÆ·ÃèÊöÀàItemDesc
+	"item":item, //å•†å“Itemç±»ï¼ŒåŒ…å«å›¾ç‰‡
+	"itemDesc":itemDesc //å•†å“æè¿°ç±»ItemDesc
 ```
 
-## 2.ÔÚspringmvcÖĞÌí¼ÓfreemarkerµÄÅäÖÃ
+## 2.åœ¨springmvcä¸­æ·»åŠ freemarkerçš„é…ç½®
 ```xml
-    <!-- freemarkerµÄÅäÖÃ -->
-    <bean id="freeMarkerConfigurer" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+    <!-- freemarkerçš„é…ç½® -->
+    <bean id="freeMarkerConfigurer" 
+	  class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
         <property name="templateLoaderPath" value="/WEB-INF/ftl/"/>
         <property name="defaultEncoding" value="utf-8"></property>
     </bean>
