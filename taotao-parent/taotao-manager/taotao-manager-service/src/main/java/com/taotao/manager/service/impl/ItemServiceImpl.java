@@ -5,6 +5,8 @@ import com.github.pagehelper.PageInfo;
 import com.taotao.common.pojo.EasyUIDataGridResult;
 import com.taotao.common.pojo.TaotaoResult;
 import com.taotao.common.utils.IDUtils;
+import com.taotao.common.utils.JsonUtils;
+import com.taotao.jedis.JedisClient;
 import com.taotao.manager.service.ItemService;
 import com.taotao.mapper.TbItemDescMapper;
 import com.taotao.mapper.TbItemMapper;
@@ -13,7 +15,9 @@ import com.taotao.pojo.TbItemDesc;
 import com.taotao.pojo.TbItemDescExample;
 import com.taotao.pojo.TbItemExample;
 import com.taotao.pojo.TbItemExample.Criteria;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Service;
@@ -37,6 +41,14 @@ public class ItemServiceImpl implements ItemService{
     @Resource(name = "itemAddTopic")
     private Destination destination;//java的注解
 
+    @Autowired
+    private JedisClient jedisClient;
+
+    @Value("${ITEM_INFO}")
+    private String ITEM_INFO;
+    @Value("${TIEM_EXPIRE}")
+    private Integer TIEM_EXPIRE;
+
     /**
      * 通过ID查询商品
      *
@@ -45,7 +57,34 @@ public class ItemServiceImpl implements ItemService{
      */
     @Override
     public TbItem getItemById(long itemId) {
-        return tbItemMapper.selectByPrimaryKey(itemId);
+
+        /**第9天---从redis缓存查询商品信息**/
+        try {
+            String itemJson = jedisClient.get(ITEM_INFO + ":" + itemId + ":BASE");
+            if (StringUtils.isNotEmpty(itemJson)){
+                //把itemJson转换为TbItem对象
+                TbItem tbItem = JsonUtils.jsonToPojo(itemJson, TbItem.class);
+                return tbItem;
+            }
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+        /**第9天---从redis缓存查询商品信息**/
+
+        //从数据库中查询TbItem商品信息
+        TbItem tbItem = tbItemMapper.selectByPrimaryKey(itemId);
+
+        /**第9天---将数据保存到redis缓存**/
+        try {
+            //把数据保存到缓存
+            jedisClient.set(ITEM_INFO + ":" + itemId + ":BASE", JsonUtils.objectToJson(tbItem));
+            //设置缓存的有效期
+            jedisClient.expire(ITEM_INFO + ":" + itemId + ":BASE",TIEM_EXPIRE);
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+        /**第9天---将数据保存到redis缓存**/
+        return tbItem;
     }
 
     /**
@@ -144,6 +183,45 @@ public class ItemServiceImpl implements ItemService{
             tbItemMapper.deleteByPrimaryKey(id);
         }
         return TaotaoResult.ok();
+    }
+
+
+    /**
+     * 通过ID查询商品介绍
+     * @param itemId
+     * @return
+     */
+    @Override
+    public TbItemDesc getItemDescById(long itemId) {
+
+
+        /**第9天---从redis缓存查询商品描述**/
+        try {
+            String itemDescJson = jedisClient.get(ITEM_INFO + ":" + itemId + ":DESC");
+            if (StringUtils.isNotEmpty(itemDescJson)){
+                //将json转换为对象
+                TbItemDesc itemDesc = JsonUtils.jsonToPojo(itemDescJson, TbItemDesc.class);
+                return itemDesc;
+            }
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+        /**第9天---从redis缓存查询商品描述**/
+
+        //从数据库查询商品描述
+        TbItemDesc itemDesc = tbItemDescMapper.selectByPrimaryKey(itemId);
+
+        /**第9天---将数据保存到redis缓存**/
+        try {
+            //将商品描述添加redis缓存
+            jedisClient.set(ITEM_INFO + ":" + itemId + ":DESC",JsonUtils.objectToJson(itemDesc));
+            //设置过期时间
+            jedisClient.expire(ITEM_INFO + ":" + itemId + ":DESC",TIEM_EXPIRE);
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+        /**第9天---将数据保存到redis缓存**/
+        return itemDesc;
     }
 
 

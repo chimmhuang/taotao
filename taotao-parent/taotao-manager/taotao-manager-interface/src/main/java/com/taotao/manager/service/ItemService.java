@@ -14,5 +14,6 @@ public interface ItemService {
     TaotaoResult addItem(TbItem item,String desc);
     TaotaoResult updateItemStatus(List<Long> ids,Byte status);
     TaotaoResult deleteItem(List<Long> ids);
+    TbItemDesc getItemDescById(long itemId);
 
 }
