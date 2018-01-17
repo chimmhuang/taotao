@@ -1,4 +1,4 @@
-package com.taotao.jedis;
+package com.taotao.content.jedis;
 
 import org.junit.Test;
 import redis.clients.jedis.HostAndPort;

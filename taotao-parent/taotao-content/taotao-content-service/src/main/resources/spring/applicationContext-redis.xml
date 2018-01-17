@@ -17,7 +17,7 @@
         <constructor-arg name="host" value="${DELL_SERVER_ZOOKEEPER}"/>
         <constructor-arg name="port" value="6379"/>
     </bean>
-    <bean id="jedisClientPool" class="com.taotao.jedis.utils.JedisClientPool"/>
+    <bean id="jedisClientPool" class="com.taotao.content.jedis.JedisClientPool"/>
 
     <!--
         redis集群版
@@ -52,7 +52,7 @@
                 <!--</bean></set>-->
         <!--</constructor-arg>-->
     <!--</bean>-->
-    <!--<bean id="jedisClientCluster" class="com.taotao.jedis.utils.JedisClientCluster"/>-->
+    <!--<bean id="jedisClientCluster" class="JedisClientCluster"/>-->
 
 
 </beans>

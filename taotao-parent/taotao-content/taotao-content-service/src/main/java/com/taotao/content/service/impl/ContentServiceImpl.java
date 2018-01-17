@@ -6,7 +6,7 @@ import com.taotao.common.pojo.EasyUIDataGridResult;
 import com.taotao.common.pojo.TaotaoResult;
 import com.taotao.common.utils.JsonUtils;
 import com.taotao.content.service.ContentService;
-import com.taotao.jedis.utils.JedisClient;
+import com.taotao.content.jedis.JedisClient;
 import com.taotao.mapper.TbContentMapper;
 import com.taotao.pojo.TbContent;
 import com.taotao.pojo.TbContentExample;

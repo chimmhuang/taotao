@@ -1,4 +1,4 @@
-package com.taotao.jedis.utils;
+package com.taotao.content.jedis;
 
 import org.springframework.beans.factory.annotation.Autowired;
 

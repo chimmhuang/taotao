@@ -1,4 +1,4 @@
-package com.taotao.jedis;
+package com.taotao.sso.jedis;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import redis.clients.jedis.JedisCluster;

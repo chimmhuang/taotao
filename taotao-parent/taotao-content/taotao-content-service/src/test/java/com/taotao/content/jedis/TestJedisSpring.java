@@ -1,6 +1,5 @@
-package com.taotao.jedis;
+package com.taotao.content.jedis;
 
-import com.taotao.jedis.utils.JedisClient;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
