@@ -7,12 +7,15 @@
 ------
 
 # 心得体会&学到的东西
-	1.在给taotao-common添加servlet-api依赖的时候，有一个属性是<scope>provided</scope>，这个是在编译、测试、的时候会有，
-	  但是在打包发布的时候不会有，因为tomcat已经提供了这个功能，若发布这个依赖，则会造成包冲突
+	1.在给taotao-common添加servlet-api依赖的时候，有一个属性是<scope>provided</scope>，这个是在编译、测试、的时候
+	  会有，但是在打包发布的时候不会有，因为tomcat已经提供了这个功能，若发布这个依赖，则会造成包冲突
 
 	2.n$.post("/user/register",$("#personRegForm").serialize()。将表单序列化，形成key-value的格式
 
 	3.Ajax跨域请求，会在参数后面带上callback，返回js语句
+	
+	4.在用户登陆成功后，应该生成一个唯一的SessionID，保存在cookie里面，然后用户下次可以直接通过这个sessionId查找
+	  用户名和密码，直接登陆
 		
 # 遇到的问题
 	N/A
