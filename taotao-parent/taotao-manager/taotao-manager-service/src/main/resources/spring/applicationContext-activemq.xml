@@ -13,7 +13,7 @@
 
     <!-- 真正可以产生Connection的ConnectionFactory，由对应的 JMS服务厂商提供 -->
     <bean id="targetConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
-        <property name="brokerURL" value="tcp://${DELL_SERVER_ZOOKEEPER}:61616"/>
+        <property name="brokerURL" value="tcp://${LOCAL_INTEGRATED_SERVER}:61616"/>
     </bean>
 
     <!--

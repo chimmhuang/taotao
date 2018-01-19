@@ -40,7 +40,7 @@
 
     <!--引用Dubbo服务-->
     <dubbo:application name="taotao-manager-web"/>
-    <dubbo:registry protocol="zookeeper" address="${DELL_SERVER_ZOOKEEPER}:2181"/>
+    <dubbo:registry protocol="zookeeper" address="${LOCAL_INTEGRATED_SERVER}:2181"/>
     <dubbo:reference interface="com.taotao.manager.service.ItemService" id="itemService"/>
     <dubbo:reference interface="com.taotao.manager.service.ItemCatService" id="itemCatService"/>
     <dubbo:reference interface="com.taotao.manager.service.ItemDescService" id="itemDescServiceImpl"/>

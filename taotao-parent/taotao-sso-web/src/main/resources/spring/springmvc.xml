@@ -33,14 +33,15 @@
         配置资源映射、若不配置，无法加载css和js
         网页静态化后，只需要拦截.html，所以不需要配置资源映射
     -->
-    <!--<mvc:resources location="/css/" mapping="/css/**"/>-->
-    <!--<mvc:resources location="/js/" mapping="/js/**"/>-->
+    <mvc:resources location="/WEB-INF/css/" mapping="/css/**"/>
+    <mvc:resources location="/WEB-INF/js/" mapping="/js/**"/>
+    <mvc:resources location="/WEB-INF/images/" mapping="/images/**"/>
 
 
     <!--引用Dubbo服务-->
     <dubbo:application name="taotao-search-web"/>
-    <dubbo:registry protocol="zookeeper" address="${DELL_SERVER_ZOOKEEPER}:2181"/>
+    <dubbo:registry protocol="zookeeper" address="${LOCAL_INTEGRATED_SERVER}:2181"/>
 
-    <!--<dubbo:reference interface="com.taotao.search.service.SearchService" id="searchServiceImpl"/>-->
+    <dubbo:reference interface="com.taotao.sso.service.UserService" id="userServiceImpl"/>
 
  </beans>
