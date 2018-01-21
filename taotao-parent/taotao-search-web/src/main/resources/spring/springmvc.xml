@@ -39,7 +39,7 @@
 
     <!--引用Dubbo服务-->
     <dubbo:application name="taotao-search-web"/>
-    <dubbo:registry protocol="zookeeper" address="${DELL_SERVER_ZOOKEEPER}:2181"/>
+    <dubbo:registry protocol="zookeeper" address="${ZOOKEEPER_SERVER}:2181"/>
 
     <dubbo:reference interface="com.taotao.search.service.SearchService" id="searchServiceImpl"/>
 

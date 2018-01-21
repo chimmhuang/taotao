@@ -40,7 +40,7 @@
 
     <!--引用Dubbo服务-->
     <dubbo:application name="taotao-search-web"/>
-    <dubbo:registry protocol="zookeeper" address="${LOCAL_INTEGRATED_SERVER}:2181"/>
+    <dubbo:registry protocol="zookeeper" address="${ZOOKEEPER_SERVER}:2181"/>
 
     <dubbo:reference interface="com.taotao.sso.service.UserService" id="userServiceImpl"/>
 

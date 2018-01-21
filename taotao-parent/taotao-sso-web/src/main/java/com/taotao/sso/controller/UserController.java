@@ -112,6 +112,11 @@ public class UserController {
     }
 
 
+    /**
+     * 用户登出
+     * @param token SessionId
+     * @return TaotaoResult
+     */
     @RequestMapping("/user/logout/{token}")
     @ResponseBody
     public TaotaoResult logout(@PathVariable String token){
